@@ -83,9 +83,7 @@
   (vector-set! box-vector d (- (vector-ref box-vector d) 1))
 
   (define r (vector-ref board row))
-  (vector-set! r col 0)
-
-  )
+  (vector-set! r col 0))
 
 (define (helper d row col board rows columns boxes) 
   (placeNumber d row col board rows columns boxes)
