@@ -95,7 +95,7 @@
 (define (remove-cells board m n cells_removed)
 (let* ([row (random (* n m))]
          [col (random (* n m))])
-    (if (> cells_removed (* 0.95 (* (* n m) (* n m))))
+    (if (> cells_removed (* 0.85 (* (* n m) (* n m))))
          board
         (remove-cells (set-list board row col 0) n m (+ cells_removed 1)))))
 
