@@ -91,6 +91,16 @@
                                                          (remove* (get-row board row 0 m n)(remove* (get-col board 0 col m n) (create-list (* m n)))))))]
 [else (solve board row (+ col 1) m n)]))
 
+
+(define (remove-cells board m n cells_removed)
+(let* ([row (random (* n m))]
+         [col (random (* n m))])
+    (if (> cells_removed (* 0.95 (* (* n m) (* n m))))
+         board
+        (remove-cells (set-list board row col 0) n m (+ cells_removed 1)))))
+
+(define (generate m n)
+ (display-board (remove-cells (solve (build-list (* m n) (lambda (x) (build-list (* m n) (lambda (x) 0)))) 0 0 m n) m n 0) (* m n)))
 ;#########################################################################################################################################################
 (define (display-board board total)
  (for ([i (in-range total)])
@@ -120,15 +130,6 @@
 (display "Solved 4x4 Board\n")
 (display-board (solve board_4_4 0 0 4 4) 16)
 
-(define (remove-cells board m n cells_removed)
-(let* ([row (random (* n m))]
-         [col (random (* n m))])
-    (if (> cells_removed (* 0.95 (* (* n m) (* n m))))
-         board
-        (remove-cells (set-list board row col 0) n m (+ cells_removed 1)))))
-
-(define (generate m n)
- (display-board (remove-cells (solve (build-list (* m n) (lambda (x) (build-list (* m n) (lambda (x) 0)))) 0 0 m n) m n 0) (* m n)))
 
 (display "generated 3x3 board\n")
 (generate 3 3)
